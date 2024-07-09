@@ -562,4 +562,33 @@ console.log(JSON.parse(str)); // 把字符串变成对象
 newObj=JSON.parse(JSON.stringify(obj))//深拷贝
 ```
 
-## 
+## require 和 import 的区别
+
+require和import在JavaScript中都是用于加载模块的方法，但它们之间存在一些显著的区别。以下是关于require和import区别的详细解释：
+
+1. 规范与版本：
+   - require是CommonJS规范的模块化语法，主要在Node.js环境中使用。
+   - import是ECMAScript 6（ES6）规范的模块化语法，用于现代前端JavaScript开发中。
+2. 加载时机：
+   - require是运行时加载，即代码执行到require语句时才会加载并执行模块代码。
+   - import是编译时加载，即在代码执行前，模块的代码已经被加载和编译。
+3. 语法位置：
+   - require可以写在代码的任意位置，只要确保在调用模块的代码之前即可。
+   - import只能写在文件的最顶端，且不可在条件语句或函数作用域中使用。
+4. 导出与值的变化：
+   - require通过module.exports导出的值就不能再变化，是静态的。
+   - import通过export导出的值可以改变，具有动态绑定的特性。
+5. 导出方式：
+   - require通过module.exports导出的是exports对象，可以包含多个属性和方法。
+   - import通过export导出的是指定输出的代码，可以是单个值、多个值或默认导出。
+6. 性能：
+   - require运行时才引入模块的属性，所以性能相对较低。
+   - import编译时引入模块的属性，性能稍高，因为它允许在编译时进行静态分析和优化。
+7. 兼容性：
+   - require在Node.js环境中被广泛支持，但在浏览器中需要额外的工具（如Browserify）来实现。
+   - import在现代浏览器中得到了原生支持，但在Node.js中需要使用如Babel之类的转译器将ES6代码转换为ES5代码才能使用。
+8. 语法差异：
+   - 使用require时，通常将模块导出的内容赋值给一个变量，如`const module = require('module-name')`。
+   - 使用import时，可以直接导入模块中导出的内容，如`import { functionName } from 'module-name'`。
+
+总结来说，require和import的主要区别在于它们所属的规范、加载时机、语法位置、导出与值的变化、导出方式、性能、兼容性和语法差异。在选择使用哪种方式时，需要根据具体的开发环境和需求来决定。

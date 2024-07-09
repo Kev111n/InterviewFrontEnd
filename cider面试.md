@@ -826,11 +826,11 @@ require和import在JavaScript中都是用于加载模块的方法，但它们之
 
 **应用层（Application Layer）**：直接为用户的应用程序提供服务，如Web浏览器、电子邮件客户端等。
 
-![img](https://img-blog.csdnimg.cn/img_convert/67df7eca8ba486a7282bef74321e2722.png)
+![img](./images/osiModel.png)
 
-![img](https://img-blog.csdnimg.cn/img_convert/c2b921fd2023201a457a2b07fe3e8e9a.png)
+![img](./images/osi-TCPIP-PDU.jfif)
 
-![image-20210824140534676](https://img-blog.csdnimg.cn/img_convert/ca899d9a067e8c6d6650f1b5f229648b.png)
+![image-20210824140534676](./images/TCPIP.png)
 
 ### 防抖
 
