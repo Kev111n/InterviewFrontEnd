@@ -592,3 +592,105 @@ require和import在JavaScript中都是用于加载模块的方法，但它们之
    - 使用import时，可以直接导入模块中导出的内容，如`import { functionName } from 'module-name'`。
 
 总结来说，require和import的主要区别在于它们所属的规范、加载时机、语法位置、导出与值的变化、导出方式、性能、兼容性和语法差异。在选择使用哪种方式时，需要根据具体的开发环境和需求来决定。
+
+## 判断对象是否为空
+
+### 1.JSON.stringify(obj)==='{}'
+
+```javascript
+    let data = {};
+    let data1 = {
+        name: "大帅哥",
+        age: "18"
+    }
+   console.log(JSON.stringify(data) === '{}') // true
+   console.log(JSON.stringify(data1) === '{}') // false
+
+```
+
+### 2.Object.keys(obj).length
+
+Object.keys(obj)返回一个数组包含对象所有的键
+
+```javascript
+    let data = {};
+    let data1 = {
+        name: "大帅哥",
+        age: "18"
+    }
+   console.log(Object.keys(data).length)// 0
+```
+
+### 3.Object.values(obj).length
+
+Object.values(obj)返回一个数组包含对象所有的值
+
+```javascript
+    let data = {};
+    let data1 = {
+        name: "大帅哥",
+        age: "18"
+    }
+    console.log(Object.values(data).length)// 0
+	console.log(Object.values(data1))//['大帅哥','18']
+```
+
+### 4.使用for..in..
+
+```javascript
+let data = {};
+let data1 = {
+  name: "大帅哥",
+  age: "18",
+};
+function isEmpty(obj) {
+  for (let key in obj) {
+    return false;
+  }
+  return true;
+}
+console.log(isEmpty(data)); //true
+console.log(isEmpty(data1)); //false
+```
+
+进一步优化：加入**hasOwnProperty**确保只检查对象自身的属性，而不是继承的属性
+
+```javascript
+let data = {};
+let data1 = {
+  name: "大帅哥",
+  age: "18",
+};
+function isEmpty(obj) {
+  for (let key in obj) {
+  	if (obj.hasOwnProperty(key)) {
+           return false
+  	}
+  }
+  return true;
+}
+console.log(isEmpty(data)); //true
+console.log(isEmpty(data1)); //false
+```
+
+### 5.Object.getOwnPropertyNames()
+
+Object.getOwnPropertyNames()返回一个数组包含对象所有属性名
+
+```javascript
+let data = {};
+let data1 = {
+  name: "大帅哥",
+  age: "18",
+};
+function isEmpty(obj) {
+  for (let key in obj) {
+    return false;
+  }
+  return true;
+}
+let arr = Object.getOwnPropertyNames(data);
+let arr1 = Object.getOwnPropertyNames(data1);
+console.log(arr.length == 0);true
+console.log(arr1.length == 0);false
+```
