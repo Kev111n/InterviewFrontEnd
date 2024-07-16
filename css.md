@@ -179,3 +179,34 @@
 display:none会触发重排重绘，visibility:hidden和opacity:0只会触发重绘
 
 transition对display和visibility是无效的，但是对opacity有效
+
+## 请阐述块格式化上下文（Block Formatting Context）、工作原理以及形成条件？
+
+块格式化上下文（Block Formatting Context，BFC）是一个独立的渲染区域，在这个区域内，元素的布局和外部元素互不影响。BFC是 Web 页面布局中的一种重要机制，主要用于控制块级元素的布局及其内部元素的排列方式。
+
+BFC的工作原理：
+
+1. 内部的块级盒子会在垂直方向一个接一个放置。
+2. 块级盒子的垂直间距（margin）会发生折叠。相邻的块级盒子的上下外边距会取最大值，而非相加。
+3. BFC的区域不会与浮动盒子重叠。在计算布局时，BFC会考虑浮动元素的占用空间，从而避免与浮动元素重叠。
+4. 计算BFC的高度时，浮动元素也参与计算。
+5. BFC是一个独立的容器，外部元素对其内部元素布局没有影响；同样，BFC内部元素的布局也不会影响外部元素。
+
+形成BFC的条件：
+
+要创建一个BFC，需要满足以下条件之一：
+
+1. 根元素（`<html>`）。
+2. 浮动元素（`float`属性为`left`或`right`）。
+3. 绝对定位元素（`position`属性为`absolute`或`fixed`）。
+4. 内联块（`display`属性为`inline-block`）。
+5. 表格单元格（`display`属性为`table-cell`）。
+6. 表格标题（`display`属性为`table-caption`）。
+7. 匿名表格单元格（`display`属性为`table`、`table-row`、`table-row-group`、`table-header-group`、`table-footer-group`、`table-column`、`table-column-group`）。
+8. 元素的`overflow`属性值不为`visible`（例如，`auto`、`scroll`、`hidden`）。
+9. 弹性盒子（`display`属性为`flex`或`inline-flex`）。
+10. 网格容器（`display`属性为`grid`或`inline-grid`）。
+11. 多列容器（`column-count`或`column-width`属性不为`auto`）。
+12. `contain`属性值为`layout`、`paint`或`strict`。
+
+通过满足以上条件之一，可以创建BFC，实现独立渲染区域。在实际应用中，BFC有助于解决外边距折叠、浮动元素引起的布局问题等。
