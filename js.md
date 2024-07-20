@@ -694,3 +694,101 @@ let arr1 = Object.getOwnPropertyNames(data1);
 console.log(arr.length == 0);true
 console.log(arr1.length == 0);false
 ```
+
+## 立即执行函数（IIFE）
+
+立即执行函数就是声明一个函数，然后立即执行这个函数，执行完后这个函数的定义就不存在了
+
+一般写法如下
+
+```javascript
+const result=(function (参数){
+    //函数内容
+})(传入的参数值);
+```
+
+result接收函数返回值可以省去
+
+## var let const
+
+var声明的变量即使全局变量也是顶层变量
+
+var声明的变量存在变量提升现象，就是把解释器在执行代码之前会将变量的声明移动到其作用域的顶端，会出现变量在声明之前就可以引用不会报错，而是认为是`undefined`。如下：
+
+```javascript
+console.log(a);//undefined
+var a = 10;
+```
+
+使用var可以重复声明变量，后一次的声明会覆盖前一次的声明。let则不行，重复声明会报错。
+
+```javascript
+var a = 10;
+var a = 20;
+console.log(a);//20
+```
+
+let是ES6中新增的声明变量的命令，let不存在变量提升，也不能重复声明，只在其声明的代码块中生效。
+
+一个变量在使用let变量声明前都是不可以使用的，这就是大家所说的“暂时性死区”。
+
+```javascript
+var a = 10;
+function a(){
+    console.log(a);//ReferenceError,无法引用到外部var声明的a
+    let a = 20;
+    console.log(a);//20
+}
+```
+
+const声明一个只读的常量，const一旦声明就必须立即初始化，不能留到以后再进行赋值。
+
+const保证的是变量指向的内存地址所保存的数据不允许改动（即栈内存在的值和地址）。
+
+JavaScript 的数据类型分为两类：原始值类型和对象（Object类型）。
+
+对于原始值类型（undefined、null、true/false、number、string），值就保存在变量指向的那个内存地址（在栈中），因此 const 声明的原始值类型变量等同于常量。
+
+对于对象类型（object，array，function等），变量指向的内存地址其实是保存了一个指向实际数据的指针，所以 const 只能保证指针是不可修改的，至于指针指向的数据结构是无法保证其不能被修改的（在堆中）。
+
+示例如下：
+
+```javascript
+const a = 10;
+a = 20;//TypeError: Assignment to constant variable.
+const b = {
+    name:'aaa';
+    age:'10';
+}
+b.name='bbb';
+console.log(b.name);//bbb
+b={};//TypeError: Assignment to constant variable.
+```
+
+**var let const的区别**
+
+- var存在变量提升，let和const不存在
+
+- var可以重复定义，let和const不可以
+
+- let和const有暂时性死区，var没有
+
+- let和const存在块级作用域，var没有，如下：
+
+  ```javascript
+  if (true) {
+    var c = 30;
+  }
+  console.log(c);//30
+  if (true) {
+    const b = 20;
+  }
+  console.log(b);//ReferenceError: a is not defined
+  if (true) {
+    let a = 10;
+  }
+  console.log(a);//ReferenceError: a is not defined
+  ```
+
+使用中尽量使用const，其他情况使用let，能不使用var就不使用var
+

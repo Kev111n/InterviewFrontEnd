@@ -13,7 +13,7 @@ useEffect(() => {
 
 **useEffect 规则**
 
-- 没有传第二个参数时，在每次 render 之后都会执行 useEffect中的内容
+- 没有传第二个参数时，在**每次 render 之后**都会执行 useEffect中的内容
 - useEffect接受第二个参数来控制跳过执行，下次 render 后如果指定的值没有变化就不会执行
 - useEffect 是在 render 之后浏览器已经渲染结束才执行
 
