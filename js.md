@@ -792,3 +792,26 @@ b={};//TypeError: Assignment to constant variable.
 
 使用中尽量使用const，其他情况使用let，能不使用var就不使用var
 
+## new做了什么？
+
+1. 创建一个空对象，将它的引用赋给构造函数的 this，继承构造函数的prototype（就是令空对象的\_\_proto\_\_指向构造函数的prototype）；
+2. 通过this将属性和方法添加至这个对象，既执行构造函数；
+3. 对构造函数的返回值做判断，如果构造函数的返回值是对象则返回该对象，如果是原始类型则返回第一步创建的空对象。
+
+**验证**
+
+```javascript
+function Person(name) {
+  this.name = name;
+  return {
+    age: 22,
+  };
+}
+function Person2(name) {
+  this.name = name;
+  return "test";
+}
+console.log(new Person("pillow")); //{ age: 22 }
+console.log(new Person2("pillow")); //Person2 { name: 'pillow' }
+```
+
